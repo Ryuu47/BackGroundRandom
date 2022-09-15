@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/main.js">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+
+<body>
+    <main class="d-flex-column justify-content-center align-self-center flex-wrap">
+        <h1 class="text-center py-2  font-weight-bold">Background <br> generator</h1>
+        <div class="form-input d-flex justify-content-center my-4 ">
+            <input type="color" class="mx-2" id="inputcolor1" name="inputcolor1" value="#ffc800">
+            <input type="color" class="mx-2" id="inputcolor2" name="inputcolor2" value="#000000">
+            <button class="mx-2">Random</button>
+        </div>
+        <div class="text">
+            <h2 class="text-center">This is the Background</h2>
+            <h4 class="css-code text-center">
+                linear-gradient(to right,
+            </h4>
+        </div>
+
+    </main>
+
+    <style>
+        h1 {
+            letter-spacing: 32px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 520%;
+            font-weight: bold;
+        }
+
+        h2 {
+            letter-spacing: 16px;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-weight: bold;
+        }
+
+        main {
+            min-height: 792px;
+            background-image: linear-gradient(to right, rgb(255, 200, 0), rgb(0, 0, 0));
+        }
+    </style>
+    <script>
+        var btnRandom = document.querySelector('button');
+        var colorInputLeft = document.querySelector('#inputcolor1');
+        var colorInputRight = document.querySelector('#inputcolor2');
+        var mainTag = document.querySelector('main');
+        var h4Element = document.querySelector('h4');
+        function hexStringToRGB(str) {
+            rgb = [];
+            const r = parseInt(str.substr(1, 2), 16);
+            const g = parseInt(str.substr(3, 2), 16);
+            const b = parseInt(str.substr(5, 2), 16);
+            rgb.push(r, g, b);
+            return rgb;
+        }
+        function randomColor() {
+            return "#" + (Math.floor(Math.random() * 16777215).toString(16));
+        }
+
+        
+        colorInputLeft.addEventListener('focusout',function (e) {
+            let colorInputLeftValue = e.target.value;
+            let colorInputRightValue = colorInputRight.value;
+            let arrColorLeft = hexStringToRGB(colorInputLeftValue);
+            let arrColorRight = hexStringToRGB(colorInputRightValue); 
+            console.log("đổi bên trái")
+            mainTag.style.backgroundImage = `linear-gradient(to right,rgb(${arrColorLeft[0]}, ${arrColorLeft[1]},${arrColorLeft[2]}),rgb(${arrColorRight[0]}, ${arrColorRight[1]},${arrColorRight[2]}))`;  
+            // h4Element.setAttribute('textContent',`linear-gradient(to right,rgb(${arrColorLeft[0]}, ${arrColorLeft[1]},${arrColorLeft[2]}),rgb(${arrColorRight[0]}, ${arrColorRight[1]},${arrColorRight[2]}))`)
+        });
+        colorInputRight.addEventListener('focusout',function (e) {
+            let colorInputRightValue = e.target.value;
+            let colorInputLeftValue = colorInputLeft.value;
+            let arrColorLeft = hexStringToRGB(colorInputLeftValue);
+            let arrColorRight = hexStringToRGB(colorInputRightValue); 
+            console.log("đổi phải")
+            mainTag.style.backgroundImage = `linear-gradient(to right,rgb(${arrColorLeft[0]}, ${arrColorLeft[1]},${arrColorLeft[2]}),rgb(${arrColorRight[0]}, ${arrColorRight[1]},${arrColorRight[2]}))`;  
+            // h4Element.setAttribute('textContent',`linear-gradient(to right,rgb(${arrColorLeft[0]}, ${arrColorLeft[1]},${arrColorLeft[2]}),rgb(${arrColorRight[0]}, ${arrColorRight[1]},${arrColorRight[2]}))`)
+            
+        });
+        // console.log(colorInputLeft);
+        
+        btnRandom.addEventListener('click',function () {
+            let randomColorLeft = randomColor();
+            let randomColorRight = randomColor();
+            console.log(randomColorLeft);
+            colorInputLeft.setAttribute('value', randomColorLeft);
+            colorInputRight.setAttribute('value', randomColorRight);
+            let arrColorLeft = hexStringToRGB(randomColorLeft);
+            let arrColorRight = hexStringToRGB(randomColorRight);
+            console.log("bấm nút")
+            mainTag.style.backgroundImage = `linear-gradient(to right,rgb(${arrColorLeft[0]}, ${arrColorLeft[1]},${arrColorLeft[2]}),rgb(${arrColorRight[0]}, ${arrColorRight[1]},${arrColorRight[2]}))`;
+            // h4Element.setAttribute('textContent',`linear-gradient(to right,rgb(${arrColorLeft[0]}, ${arrColorLeft[1]},${arrColorLeft[2]}),rgb(${arrColorRight[0]}, ${arrColorRight[1]},${arrColorRight[2]}))`)
+        });
+        
+
+    </script>
+</body>
+
+</html>
